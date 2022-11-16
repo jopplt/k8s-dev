@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: app1
+build:
+  artifacts:
+    - image: app1
+      context: ./app1
+
+profiles:
+  - name: local
+    deploy:
+      kustomize:
+        paths: 
+          - k8s/overlays/local
+      kubeContext: k3d-demo
+
+portForward:
+  - resourceType: service
+    resourceName: app1
+    namespace: default
+    port: 8000
+    localPort: 8000
