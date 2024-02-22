@@ -42,4 +42,4 @@ tasks:
       - sh: command -v skaffold
         msg: Skaffold is required.
     cmds:
-      - skaffold dev -p local --port-forward
+      - skaffold dev -p local --port-forward --kube-context $(kubectl config current-context)
